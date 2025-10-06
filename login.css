@@ -1,0 +1,520 @@
+/* ==============================
+   Global Variables
+============================== */
+:root {
+  --primary: #6a5acd; /* slate blue */
+  --secondary: #00bfff; /* deep sky blue */
+  --text-light: #ffffff;
+  --text-dark: #1a1a1a;
+  --bg-glass: rgba(255, 255, 255, 0.15);
+  --border-glass: rgba(255, 255, 255, 0.3);
+  --shadow: rgba(0, 0, 0, 0.25);
+  --transition: 0.3s ease;
+  --radius: 1rem;
+  --error-color: #ff6b6b;
+  --success-color: #51cf66;
+  --warning-color: #ffc107;
+}
+
+/* ==============================
+   Reset + Body
+============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-light);
+  background: linear-gradient(-45deg, var(--primary), var(--secondary), #4a148c, #009688);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  padding: 1rem;
+  padding-top: 80px; /* to prevent form from hiding under navbar */
+}
+
+/* Animated gradient background */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ==============================
+   Navbar
+============================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+.nav-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+.navbar nav a {
+  margin-left: 1.5rem;
+  text-decoration: none;
+  color: var(--text-light);
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.navbar nav a:hover {
+  color: var(--secondary);
+}
+
+/* ==============================
+   Container & Glass Card
+============================== */
+.container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.glass-card {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px var(--shadow);
+  padding: 2rem;
+  text-align: center;
+  animation: fadeIn 1s ease forwards;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==============================
+   Typography
+============================== */
+h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--text-light), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h4 {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+/* ==============================
+   Form Styles
+============================== */
+.form-group {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-light);
+}
+
+.input-with-icon {
+  position: relative;
+  width: 100%;
+}
+
+.input-with-icon i:first-of-type {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  z-index: 2;
+}
+
+.input-with-icon input {
+  width: 100%;
+  padding: 12px 45px 12px 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-light);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.input-with-icon input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.input-with-icon input:focus {
+  border-color: var(--secondary);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.2);
+}
+
+/* Input validation states */
+.input-with-icon input.valid {
+  border-color: var(--success-color);
+}
+
+.input-with-icon input.invalid {
+  border-color: var(--error-color);
+}
+
+/* Password toggle button */
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  padding: 4px;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.password-toggle:hover {
+  color: var(--secondary);
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* ==============================
+   Button Styles
+============================== */
+button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(106, 90, 205, 0.4);
+}
+
+button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+button[type="submit"]:disabled {
+  background: rgba(255, 255, 255, 0.2);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ==============================
+   Enhanced Message Styles
+============================== */
+.message {
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
+  animation: slideDown 0.3s ease;
+}
+
+.message.error {
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  color: var(--error-color);
+}
+
+.message.success {
+  background: rgba(81, 207, 102, 0.1);
+  border: 1px solid rgba(81, 207, 102, 0.3);
+  color: var(--success-color);
+}
+
+.message.hint {
+  background: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  color: var(--warning-color);
+  font-size: 0.85rem;
+  padding: 8px 12px;
+  margin-top: 5px;
+}
+
+.message.field-message {
+  margin-top: 5px;
+  margin-bottom: 0;
+  font-size: 0.85rem;
+  padding: 8px 12px;
+  text-align: left;
+  border-radius: 4px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Password strength indicator */
+.password-strength {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.strength-weak {
+  background: var(--error-color);
+  width: 33%;
+}
+
+.strength-medium {
+  background: var(--warning-color);
+  width: 66%;
+}
+
+.strength-strong {
+  background: var(--success-color);
+  width: 100%;
+}
+
+.strength-text {
+  font-size: 0.75rem;
+  margin-top: 4px;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ==============================
+   Footer Styles
+============================== */
+.footer {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.footer p {
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.footer a {
+  color: var(--secondary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  position: relative;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+  color: var(--text-light);
+  transform: translateY(-1px);
+}
+
+/* ==============================
+   Loading Animation
+============================== */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--text-light);
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==============================
+   Success Checkmark
+============================== */
+.checkmark {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.checkmark:after {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 12px;
+  border: solid var(--success-color);
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+/* ==============================
+   Responsive Design
+============================== */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 10px;
+  }
+  
+  .glass-card {
+    padding: 1.5rem;
+  }
+  
+  .navbar {
+    padding: 1rem;
+  }
+  
+  .navbar nav a {
+    margin-left: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h4 {
+    font-size: 0.9rem;
+  }
+  
+  .input-with-icon input {
+    padding: 10px 40px 10px 35px;
+    font-size: 13px;
+  }
+  
+  button[type="submit"] {
+    padding: 12px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .glass-card {
+    padding: 1.25rem;
+  }
+  
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+  
+  .navbar nav a {
+    margin: 0 0.5rem;
+  }
+}
+
+/* ==============================
+   Accessibility & Reduced Motion
+============================== */
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+  }
+  
+  .glass-card {
+    animation: none;
+  }
+  
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus,
+.password-toggle:focus {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --bg-glass: rgba(255, 255, 255, 0.25);
+    --border-glass: rgba(255, 255, 255, 0.8);
+    --text-light: #000000;
+  }
+  
+  body {
+    background: linear-gradient(-45deg, #0000ff, #800080, #000000, #008080);
+  }
+  
+  .input-with-icon input {
+    background: rgba(255, 255, 255, 0.9);
+    color: #000000;
+    border: 2px solid #000000;
+  }
+}
+
+/* ==============================
+   Print Styles
+============================== */
+@media print {
+  .navbar,
+  .footer,
+  .password-toggle {
+    display: none;
+  }
+  
+  .glass-card {
+    background: white;
+    color: black;
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  body {
+    background: white !important;
+    color: black;
+  }
+}
